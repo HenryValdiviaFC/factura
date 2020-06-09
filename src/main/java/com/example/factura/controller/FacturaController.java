@@ -18,6 +18,11 @@ public class FacturaController {
                   .cliente(clienteEncontrado)
                   .fechaEmision(new Date())
                   .build();
-        return null;
+
+        //De acuerdo el tipo de cliente hacer el calculo
+        // CASA /CONDOMINIO --> KW * Consumo (Si no es buen pagador)
+        // Oficina --> KW/h * Consumo
+
+        return factura;
     }
 }
