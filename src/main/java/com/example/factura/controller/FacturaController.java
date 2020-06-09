@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public class FacturaController {
 
-    public Factura getFactura(int idCliente){
+    public Factura getFacturaPeriodo(int idCliente, String fechaInicio, String fechaFin){
         //BUSCAR CLIENTE POR ID
         Cliente clienteEncontrado = new Cliente();
         //Construir Factura EN BASE AL PATRON BUILDER
