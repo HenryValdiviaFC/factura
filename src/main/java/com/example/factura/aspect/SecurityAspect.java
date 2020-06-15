@@ -1,6 +1,8 @@
 package com.example.factura.aspect;
 
+import com.example.factura.model.Bill;
 import com.example.factura.model.User;
+import com.example.factura.service.BillService;
 import com.example.factura.service.UserService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -20,8 +22,11 @@ public class SecurityAspect {
     @Autowired
     UserService serviceUser;
 
-    @Before("@annotation(auth)")
-    public void checkAccess(JoinPoint jp,Authorization auth){
+    @Autowired
+    BillService serviceBill;
+
+    @Before("@annotation(auth) && args(nroDocumento,codPeriodo)")
+    public void checkAccess(JoinPoint jp,Authorization auth,String nroDocumento, String codPeriodo){
 
         System.out.println("Verificando autenticacion");
 
@@ -45,6 +50,18 @@ public class SecurityAspect {
             throw new RuntimeException("Usuario y/o contraseña incorrectos");
 
         System.out.println("Credenciales correctas. Se procede a ejecutar el metodo");
+
+
+        System.out.println(String.format("Verificando generacion de factura para cliente %s en el periodo %s",nroDocumento,codPeriodo));
+
+
+        Bill billObject = serviceBill.getBillByClientIdAndPeriod(nroDocumento, codPeriodo);
+
+        if(billObject != null)
+            throw new RuntimeException(String.format("La factura %s del cliente %s para el periodo %s ya existe no se puede generar","Fac"+billObject.getId(),billObject.getNroDocumento(),billObject.getPeriodo()));
+
+        System.out.println("Factura no generada se procede a generar esta");
+
 
     }
 

@@ -22,26 +22,5 @@ public class ClienteServiceImpl implements ClienteService {
                 .orElseThrow(() -> new NotFoundException("Cliente no existe"));
 
         return cliente;
-        /*
-        Cliente cliente = new Cliente();
-        cliente.setId(1L);
-        cliente.setNombre("Henry Valdivia");
-        cliente.setCiudad("Lima");
-        cliente.setTipoFacturacion("CASA");
-
-        List<Consumo> consumo = new ArrayList<>();
-
-        Consumo c1 = new Consumo(LocalDateTime.now().minusMonths(1),LocalDateTime.now(),30);
-        Consumo c2 = new Consumo(LocalDateTime.now(),LocalDateTime.now().plusMonths(1),30);
-        Consumo c3 = new Consumo(LocalDateTime.now().plusMonths(1), LocalDateTime.now().plusMonths(2).plusMonths(1),30);
-
-        consumo.add(c1);
-        consumo.add(c2);
-        consumo.add(c3);
-
-        cliente.setConsumo(consumo);
-
-        return cliente;
-         */
     }
 }

@@ -7,6 +7,7 @@ import com.example.factura.repository.TarifarioRepository;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -128,8 +129,9 @@ public class TarifarioServiceImpl implements TarifarioService {
     }
 
     @Override
+    @Cacheable(value = "listTarifarios",condition = "#cliente.tipoFacturacion=='OFICINA'")
     public List<Archivo> getTarifarioByClientData(Cliente cliente) {
-
+        System.out.println("Digiendose al backend para extraer la info");
         List<Archivo> listTarifario = repository.findByCiudadAndTipoFacturacion(cliente.getCiudad(),cliente.getTipoFacturacion());
         return listTarifario;
     }
