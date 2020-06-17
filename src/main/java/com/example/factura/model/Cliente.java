@@ -23,15 +23,18 @@ public class Cliente implements Serializable {
     private String tipoFacturacion;
     @OneToMany(mappedBy = "cliente")
     private List<Consumo> consumo;
+    @Column(name = "direccion",nullable = false)
+    private String direccion;
 
     public Cliente(){}
 
-    public Cliente(String nroDocumento, String nombre, String ciudad, String tipoFacturacion) {
+    public Cliente(String nroDocumento, String nombre, String ciudad, String tipoFacturacion,String direccion) {
         this.nroDocumento = nroDocumento;
         this.nombre = nombre;
         this.ciudad = ciudad;
         this.tipoFacturacion = tipoFacturacion;
         this.consumo = new ArrayList<>();
+        this.direccion = direccion;
     }
 
 
@@ -77,6 +80,13 @@ public class Cliente implements Serializable {
         this.consumo = consumo;
     }
 
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
 
     @Override
     public String toString() {
