@@ -2,6 +2,10 @@ package com.example.factura.factory;
 
 import com.example.factura.model.Cliente;
 import com.example.factura.model.DetailsFactura;
+import com.example.factura.strategy.BillCodeCasa;
+import com.example.factura.strategy.BillCodeOficina;
+import com.example.factura.strategy.BillCodePlana;
+import com.example.factura.strategy.GenerateBillCodeStrategy;
 import com.example.factura.template.Factura;
 import com.example.factura.template.FacturaCasa;
 import com.example.factura.template.FacturaOficina;
@@ -22,15 +26,18 @@ public class FacturaFactory {
     public Factura getFactura(String tipoFacturacion){
 
         if(tipoFacturacion.equalsIgnoreCase("CASA")){
-            return new FacturaCasa(cliente,detalles);
+            BillCodeCasa strategy = new BillCodeCasa();
+            return new FacturaCasa(cliente,detalles,strategy);
         }
 
         if(tipoFacturacion.equalsIgnoreCase("OFICINA")){
-            return new FacturaOficina(cliente,detalles);
+            BillCodeOficina strategy = new BillCodeOficina();
+            return new FacturaOficina(cliente,detalles,strategy);
         }
 
         if(tipoFacturacion.equalsIgnoreCase("PLANA")){
-            return new FacturaPlana(cliente,detalles);
+            BillCodePlana strategy = new BillCodePlana();
+            return new FacturaPlana(cliente,detalles,strategy);
         }
 
         else

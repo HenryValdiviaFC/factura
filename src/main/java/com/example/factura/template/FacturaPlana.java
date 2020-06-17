@@ -2,13 +2,15 @@ package com.example.factura.template;
 
 import com.example.factura.model.Cliente;
 import com.example.factura.model.DetailsFactura;
+import com.example.factura.strategy.GenerateBillCodeStrategy;
 
 import java.util.List;
+import java.util.Random;
 
 public class FacturaPlana extends Factura {
 
-    public FacturaPlana(Cliente cliente, List<DetailsFactura> detalles) {
-        super(cliente,detalles);
+    public FacturaPlana(Cliente cliente, List<DetailsFactura> detalles, GenerateBillCodeStrategy strategy) {
+        super(cliente,detalles,strategy);
     }
 
     @Override
@@ -20,6 +22,7 @@ public class FacturaPlana extends Factura {
                 .direccion(cliente.getDireccion())
                 .nombreCliente(cliente.getNombre())
                 .nroCliente(cliente.getId())
+                .NroRecibo(strategy.generateCode("PLANA"+new Random(100).nextInt() + 1))
                 .build();
 
     }
