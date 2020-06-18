@@ -6,6 +6,5 @@ import org.springframework.http.ResponseEntity;
 
 public interface BillService {
     public Bill getBillByClientIdAndPeriod(String nroDocumento, String codPeriodo);
-    public Bill save(Bill factura);
     public ResponseEntity<Factura> buildAndCreateBuildFromClientAndPeriod(String nroDocumento, String codPeriodo);
 }

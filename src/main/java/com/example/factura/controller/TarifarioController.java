@@ -14,11 +14,10 @@ import org.springframework.web.client.ResponseErrorHandler;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/rate")
+@RequestMapping("/api/rates")
 public class TarifarioController {
 
     @Autowired
@@ -27,7 +26,7 @@ public class TarifarioController {
     @Autowired
     private PeriodoService servicePeriodo;
 
-    @PutMapping("/update/{codPeriodo}")
+    @PostMapping("/{codPeriodo}")
     public ResponseEntity<String> updateBatchTarifario(@PathVariable("codPeriodo") String codPeriodo){
         try {
             //Obtener datos del periodo
@@ -42,7 +41,7 @@ public class TarifarioController {
     }
 
 
-    @GetMapping(value = "/create/{codPeriodo}",produces = "text/csv")
+    @GetMapping(value = "/{codPeriodo}",produces = "text/csv")
     public void exportCSV(HttpServletResponse response,@PathVariable("codPeriodo") String codPeriodo) throws IOException {
 
         //Obtener datos del periodo

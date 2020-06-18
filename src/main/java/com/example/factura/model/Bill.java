@@ -3,10 +3,7 @@ package com.example.factura.model;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -16,6 +13,7 @@ import java.time.LocalDateTime;
 public class Bill implements Serializable {
 
     private static final long serialVersionUID = 3090356645132056363L;
+
 
     @Id
     @Column(name = "id",unique = true,nullable = false)

@@ -34,11 +34,6 @@ public class BillServiceImpl implements BillService{
     }
 
     @Override
-    public Bill save(Bill factura) {
-        return repository.save(factura);
-    }
-
-    @Override
     public ResponseEntity<Factura> buildAndCreateBuildFromClientAndPeriod(String nroDocumento, String codPeriodo) {
         //Obtener datos del periodo
         Periodo periodo = servicePeriodo.findPeriodoByCodigo(codPeriodo);
@@ -89,6 +84,8 @@ public class BillServiceImpl implements BillService{
         FacturaFactory factory = new FacturaFactory(cliente,detalle);
         Factura factura = factory.getFactura(cliente.getTipoFacturacion());
         factura.buildFactura();
+
+
         return new ResponseEntity<>(factura, HttpStatus.CREATED);
     }
 }
