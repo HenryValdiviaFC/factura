@@ -1,6 +1,7 @@
 package com.example.factura.controller;
 
 import com.example.factura.aspect.Authorization;
+import com.example.factura.aspect.LockThread;
 import com.example.factura.service.BillService;
 import com.example.factura.template.Factura;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ public class FacturaController {
 
     @PostMapping("/{idCliente}/{codPeriodo}")
     @Authorization
+    @LockThread
     public ResponseEntity<Factura> buildFacturaCliente(
             @PathVariable("idCliente") String nroDocumento
             , @PathVariable("codPeriodo") String codPeriodo){

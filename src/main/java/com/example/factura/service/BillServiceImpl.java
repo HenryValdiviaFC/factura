@@ -85,6 +85,11 @@ public class BillServiceImpl implements BillService{
         Factura factura = factory.getFactura(cliente.getTipoFacturacion());
         factura.buildFactura();
 
+        Bill newBill = new Bill();
+        newBill.setId(factura.getHeader().getNroRecibo());
+        newBill.setPeriodo(codPeriodo);
+        newBill.setNroDocumento(nroDocumento);
+        repository.save(newBill);
 
         return new ResponseEntity<>(factura, HttpStatus.CREATED);
     }
